@@ -34,6 +34,9 @@
 #' @return `call` the call used to run the function.
 #'
 #' @examples
+#' library(poibin)
+#' library(survival)
+#' library(numDeriv)
 #' library(KMsurv)
 #'data("larynx")
 #'fit_pbd=coxph.PB(Surv(time, delta)~age+diagyr+factor(stage),
