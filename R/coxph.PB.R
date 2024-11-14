@@ -40,6 +40,7 @@
 #'                 data=larynx,
 #'                 baseline.data=t(c(age=0,diagyr=0,stage=1)),
 #'                 bhf.initial="efron",info.option="pbd")
+#'print(fit_pbd)
 #'
 coxph.PB=function(formula, data, baseline.data, bhf.initial="efron", info.option="pbd")
 {
