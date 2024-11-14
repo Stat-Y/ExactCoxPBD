@@ -26,6 +26,9 @@
 #' @return `minusloglik`: the given `minusloglik`.
 #'
 #' @examples
+#' library(poibin)
+#' library(survival)
+#' library(numDeriv)
 #' library(KMsurv)
 #' data("larynx")
 #' cox.fit=coxph(Surv(time, delta)~age+diagyr+factor(stage),data=larynx,method="efron")
