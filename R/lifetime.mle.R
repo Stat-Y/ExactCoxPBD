@@ -20,7 +20,7 @@
 #'
 #' @return `call`: the call used in running the function.
 #' @return `coef`: the fitted coefficient, which is the optimizer of the given loss function.
-#' @return `vcov`: the hessian of the given loss function evaluated at `coef`.
+#' @return `vcov`: inverse of the hessian for the given loss function evaluated at `coef`.
 #' @return `min`: the value of the given loss function evaluated at `coef`.
 #' @return `dat`: the given `dat`.
 #' @return `minusloglik`: the given `minusloglik`.
