@@ -46,33 +46,33 @@ coxph.PB(
 
 The function returns a list containing:
 
-- `coef` fitted slope optimizing exact partial likelihood.
+- `coef`: fitted slope optimizing exact partial likelihood.
 
-- `vcov` covariance estimator for the slope.
+- `vcov`: covariance estimator for the slope.
 
-- `lambda0` fitted baseline hazard, optimized based on exact likelihood.
+- `lambda0`: fitted baseline hazard, optimized based on exact likelihood.
 
-- `logPL` vector of exact log partial likelihood evaluated at the 0 vector and `coef`.
+- `logPL`: vector of exact log partial likelihood evaluated at the 0 vector and `coef`.
 
-- `lrt` likelihood ratio test statistic for the entire slope, including its degrees of freedom and p-value.
+- `lrt`: likelihood ratio test statistic for the entire slope, including its degrees of freedom and p-value.
 
-- `wald.all` wald statistic for the entire slope, including its degrees of freedom and p-value.
+- `wald.all`: wald statistic for the entire slope, including its degrees of freedom and p-value.
 
-- `wald.each` wald statistic and p-value for each slope.
+- `wald.each`: wald statistic and p-value for each slope.
 
-- `bhf.initial` the given `bhf.initial`.
+- `bhf.initial`: the given `bhf.initial`.
 
-- `info.option` the given `info.option`.
+- `info.option`: the given `info.option`.
 
-- `n` sample size of the given `data`.
+- `n`: sample size of the given `data`.
 
-- `nevent` total number of events in the given `data`.
+- `nevent`: total number of events in the given `data`.
 
-- `dat` a data object created by `coxph.pb.dat.setup` with the initial Cox model.
+- `dat`: a data object created by `coxph.pb.dat.setup` with the initial Cox model.
 
-- `formula` the given `formula`.
+- `formula`: the given `formula`.
 
-- `call` the call used to run the function.
+- `call`: the call used to run the function.
 
 ### Example
 
