@@ -83,14 +83,11 @@ library(poibin)
 library(survival)
 library(numDeriv)
 library(KMsurv)
-
+library(ExactCoxPBD)
 data("larynx")
-fit_pbd <- coxph.PB(
-  formula = Surv(time, delta) ~ age + diagyr + factor(stage),
-  data = larynx,
-  baseline.data = t(c(age = 0, diagyr = 0, stage = 1)),
-  bhf.initial = "efron",
-  info.option = "pbd"
-)
+fit_pbd=coxph.PB(Surv(time, delta)~age+diagyr+factor(stage),
+                data=larynx,
+                baseline.data=t(c(age=0,diagyr=0,stage=1)),
+                bhf.initial="efron",info.option="pbd")
 print(fit_pbd)
 ```
