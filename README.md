@@ -32,15 +32,15 @@ coxph.PB(
 
 ### Arguments
 
-*formula*: A formula specifying the Cox model, following the syntax of `coxph` from the *survival* package.
+- `formula`: A formula specifying the Cox model, following the syntax of `coxph` from the *survival* package.
   
-*data*: The dataset for the Cox model, used in the same format as in `coxph` from the *survival* package.
+- `data`: The dataset for the Cox model, used in the same format as in `coxph` from the *survival* package.
 
-*baseline.data*: Baseline data used to calculate the fitted baseline hazard of the initial Cox model. For factor covariates, specify the reference factor level; for continuous covariates, use zero.
+- `baseline.data`: Baseline data used to calculate the fitted baseline hazard of the initial Cox model. For factor covariates, specify the reference factor level; for continuous covariates, use zero.
 
-*bhf.initial*: Tie correction method for the initial Cox model. The default is `"efron"`, with other options matching those available in the `method` argument of `coxph` from the *survival* package.
+- `bhf.initial`: Tie correction method for the initial Cox model. The default is `"efron"`, with other options matching those available in the `method` argument of `coxph` from the *survival* package.
 
-*info.option*: Method for computing the covariance estimator for the slope. The default, `"pbd"`, uses the inverse of the exact information matrix, computed numerically from the exact partial likelihood and evaluated at the PBD estimated slope. Alternatively, `"breslow"` uses the inverse of the Breslow information, also evaluated at the PBD estimated slope. This choice affects both the covariance estimation and the Wald statistic.
+- `info.option`: Method for computing the covariance estimator for the slope. The default, `"pbd"`, uses the inverse of the exact information matrix, computed numerically from the exact partial likelihood and evaluated at the PBD estimated slope. Alternatively, `"breslow"` uses the inverse of the Breslow information, also evaluated at the PBD estimated slope. This choice affects both the covariance estimation and the Wald statistic.
 
 ### Value
 
