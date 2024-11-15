@@ -1,12 +1,12 @@
 #' Fitting Cox Model with Exact Partial Likelihood.
 #'
-#' This function fits a Cox model by optimizing the exact partial likelihood for the slope and the exact likelihood for the baseline hazard. It returns estimates for both the slope and baseline hazard, along with covariance estimates for the slope. Additionally, the function provides Wald, Score, and Likelihood Ratio Test (LRT) statistics and their p-values for inference.
+#' This function fits a Cox model by optimizing the exact partial likelihood for the slope and the exact likelihood for the baseline hazard. It returns estimates for both the slope and baseline hazard, along with covariance estimates for the slope. Additionally, the function provides Wald and Likelihood Ratio Test (LRT) statistics and their p-values for inference. Refer to the manuscript for detailed calculations of the estimators and test statistics.
 #'
 #' @param formula a formula for the Cox model, following the same syntax as `coxph` from the `survival` package.
 #' @param data the dataset for the Cox model, used in the same way as in `coxph` from the `survival` package.
 #' @param baseline.data baseline data used to calculate the fitted baseline hazard of the initial Cox model. For a factor covariate, use the reference factor level; for other covariates, use zero. See the example code below for a detailed usage example.
 #' @param bhf.initial tie correction method for the initial Cox model. The default is "efron"; other options align with the `method` argument in `coxph` from the `survival` package.
-#' @param info.option method for computing the covariance estimator for the slope. The default option, "pbd," uses the inverse of the numerically computed exact information matrix (based on exact partial likelihood) evaluated at the PBD estimated slope. Alternatively, "breslow" uses the inverse of the Breslow information evaluated at the PBD estimated slope. This option affects covariance estimation, as well as Wald and Score statistics. For the Score statistic, the evaluation for the specified information is performed at the zero vector.
+#' @param info.option method for computing the covariance estimator for the slope. The default option, "pbd", uses the inverse of the exact information matrix, computed numerically from the exact partial likelihood and evaluated at the PBD estimated slope. In contrast, the "breslow" option uses the inverse of the Breslow information, also evaluated at the PBD estimated slope. This choice influences both the covariance estimation and the Wald statistic.
 #'
 #' @import poibin
 #' @import survival
@@ -22,7 +22,6 @@
 #' @return `lambda0` fitted baseline hazard, optimized based on exact likelihood.
 #' @return `logPL` vector of exact log partial likelihood evaluated at the 0 vector and `coef`.
 #' @return `lrt` likelihood ratio test statistic for the entire slope, including its degrees of freedom and p-value.
-#' @return `score` score statistic for the entire slope, including its degrees of freedom and p-value.
 #' @return `wald.all` wald statistic for the entire slope, including its degrees of freedom and p-value.
 #' @return `wald.each` wald statistic and p-value for each slope.
 #' @return `bhf.initial` the given `bhf.initial`.
@@ -94,22 +93,6 @@ coxph.PB=function(formula, data, baseline.data, bhf.initial="efron", info.option
         pvalue=1-pchisq(q=LRT,df=length(sfit$coef))
     )))
 
-  # Score
-  logPLfun=function(slope){
-    -minus.log.partial.PB.discretized(coxph.pb.dat,slope)
-  }
-  UU_null=grad(logPLfun,rep(0,length(sfit$coef)))
-  II_null=-hessian(logPLfun,rep(0,length(sfit$coef)))
-  if(info.option=="breslow"){
-    II_null=infob(dat=sfit$dat,pars=rep(0,length(sfit$coef)))
-  }
-  Score=t(UU_null)%*%solve(II_null)%*%UU_null
-  score=data.frame(
-    t(c(Score=Score,
-        df=length(sfit$coef),
-        pvalue=1-pchisq(q=Score,df=length(sfit$coef))
-    )))
-
   # Wald
   Wald=t(sfit$coef)%*%solve(sfit$vcov)%*%sfit$coef
   wald.all=data.frame(
@@ -117,7 +100,6 @@ coxph.PB=function(formula, data, baseline.data, bhf.initial="efron", info.option
         df=length(sfit$coef),
         pvalue=1-pchisq(q=Wald,df=length(sfit$coef))
     )))
-
   se_w=sqrt(diag(sfit$vcov))
   z_w=sfit$coef/se_w
   pval.w=1-pchisq(z_w^2,df=1)
@@ -133,7 +115,6 @@ coxph.PB=function(formula, data, baseline.data, bhf.initial="efron", info.option
               vcov=sfit$vcov,
               logPL=logPL,
               lrt=lrt,
-              score=score,
               wald.all=wald.all,
               wald.each=wald.each,
               bhf.initial=bhf.initial,
