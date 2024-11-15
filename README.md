@@ -1,6 +1,6 @@
 ### ExactCoxPBD R Package
 
-The *ExactCoxPBD* R package enables fitting the Cox model by optimizing the exact partial likelihood as proposed in the paper, *"An Accurate Computational Approach for Partial Likelihood Using Poisson-Binomial Distributions"* by Cho et al. This method is especially useful for data with heavy ties or high covariate variation, providing improved accuracy in Cox model estimation.
+The `ExactCoxPBD` R package enables fitting the Cox model by optimizing the exact partial likelihood as proposed in the paper, *"An Accurate Computational Approach for Partial Likelihood Using Poisson-Binomial Distributions"* by Cho et al. This method is especially useful for data with heavy ties or high covariate variation, providing improved accuracy in Cox model estimation.
 
 ### R Version Requirements
 
@@ -8,7 +8,7 @@ Requires R version 4.3.2 or higher.
 
 ### Installing the Package
 
-Ensure the following R packages are installed: `poibin`, `survival`, `numDeriv`, `KMsurv`, and `devtools`. Then, install the *ExactCoxPBD* package by running:
+Ensure the following R packages are installed: `poibin`, `survival`, `numDeriv`, `KMsurv`, and `devtools`. Then, install the `ExactCoxPBD` package by running:
 
 ```r
 devtools::install_github("Stat-Y/ExactCoxPBD")
@@ -32,47 +32,47 @@ coxph.PB(
 
 ### Arguments
 
-- `formula`: A formula specifying the Cox model, following the syntax of `coxph` from the *survival* package.
+- `formula`: a formula for the Cox model, following the same syntax as `coxph` from the `survival` package.
   
-- `data`: The dataset for the Cox model, used in the same format as in `coxph` from the *survival* package.
+- `data`: the dataset for the Cox model, used in the same way as in `coxph` from the `survival` package.
 
-- `baseline.data`: Baseline data used to calculate the fitted baseline hazard of the initial Cox model. For factor covariates, specify the reference factor level; for continuous covariates, use zero.
+- `baseline.data`: baseline data used to calculate the fitted baseline hazard of the initial Cox model. For a factor covariate, use the reference factor level; for other covariates, use zero. See the example code below for a detailed usage example.
 
-- `bhf.initial`: Tie correction method for the initial Cox model. The default is `"efron"`, with other options matching those available in the `method` argument of `coxph` from the *survival* package.
+- `bhf.initial`: tie correction method for the initial Cox model. The default is `"efron"`; other options align with the `method` argument in `coxph` from the `survival` package.
 
-- `info.option`: Method for computing the covariance estimator for the slope. The default, `"pbd"`, uses the inverse of the exact information matrix, computed numerically from the exact partial likelihood and evaluated at the PBD estimated slope. Alternatively, `"breslow"` uses the inverse of the Breslow information, also evaluated at the PBD estimated slope. This choice affects both the covariance estimation and the Wald statistic.
+- `info.option`: method for computing the covariance estimator for the slope. The default option, `"pbd"`, uses the inverse of the exact information matrix, computed numerically from the exact partial likelihood and evaluated at the PBD estimated slope. In contrast, the `"breslow"` option uses the inverse of the Breslow information, also evaluated at the PBD estimated slope. This choice influences both the covariance estimation and the Wald statistic.
 
 ### Value
 
 The function returns a list containing:
 
-*coef*: Fitted slope based on optimizing the exact partial likelihood.
-  
-*vcov*: Covariance estimator for the slope.
-  
-*lambda0*: Fitted baseline hazard, optimized based on the exact likelihood.
-  
-*logPL*: Vector of exact log partial likelihood evaluated at the 0 vector and `coef`.
-  
-*lrt*: Likelihood ratio test statistic for the entire slope, including its degrees of freedom and p-value.
-  
-*wald.all*: Wald statistic for the entire slope, including degrees of freedom and p-value.
-  
-*wald.each*: Wald statistic and p-value for each slope.
-  
-*bhf.initial*: The specified `bhf.initial` method.
-  
-*info.option*: The specified `info.option` method.
-  
-*n*: Sample size of the dataset.
-  
-*nevent*: Total number of events in the dataset.
-  
-*dat*: Data object created by `coxph.pb.dat.setup` with the initial Cox model.
-  
-*formula*: The specified formula.
-  
-*call*: The function call.
+- `coef` fitted slope optimizing exact partial likelihood.
+
+- `vcov` covariance estimator for the slope.
+
+- `lambda0` fitted baseline hazard, optimized based on exact likelihood.
+
+- `logPL` vector of exact log partial likelihood evaluated at the 0 vector and `coef`.
+
+- `lrt` likelihood ratio test statistic for the entire slope, including its degrees of freedom and p-value.
+
+- `wald.all` wald statistic for the entire slope, including its degrees of freedom and p-value.
+
+- `wald.each` wald statistic and p-value for each slope.
+
+- `bhf.initial` the given `bhf.initial`.
+
+- `info.option` the given `info.option`.
+
+- `n` sample size of the given `data`.
+
+- `nevent` total number of events in the given `data`.
+
+- `dat` a data object created by `coxph.pb.dat.setup` with the initial Cox model.
+
+- `formula` the given `formula`.
+
+- `call` the call used to run the function.
 
 ### Example
 
