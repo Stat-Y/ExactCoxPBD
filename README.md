@@ -76,7 +76,7 @@ The function returns a list containing:
 
 ### Example
 
-The following example demonstrates fitting a Cox model based on the exact partial likelihood:
+The following example fits a Cox model based on the exact partial likelihood:
 
 ```r
 library(poibin)
