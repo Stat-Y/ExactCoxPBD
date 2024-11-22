@@ -15,7 +15,6 @@ if (!require("poibin")) install.packages("poibin")
 if (!require("survival")) install.packages("survival")
 if (!require("numDeriv")) install.packages("numDeriv")
 if (!require("KMsurv")) install.packages("KMsurv")
-if (!require("devtools")) install.packages("devtools")
 if (!require("ExactCoxPBD")) devtools::install_github("Stat-Y/ExactCoxPBD")
 ```
 
